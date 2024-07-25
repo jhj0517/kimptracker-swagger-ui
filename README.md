@@ -1,58 +1,14 @@
-# How to host Swagger API documentation with GitHub Pages
-[<img alt="The blog of Peter Evans: How to Host Swagger Documentation With Github Pages" title="View blog post" src="https://peterevans.dev/img/blog-published-badge.svg">](https://peterevans.dev/posts/how-to-host-swagger-docs-with-github-pages/)
+# KimpTracker API Documnetation
+해당 레포지토리는 [swagger-github-pages](https://github.com/peter-evans/swagger-github-pages)를 템플릿으로 사용해 KimpTracker Open API 를 [Swagger UI](https://github.com/swagger-api/swagger-ui) 로 문서화한 레포지토리입니다.
 
-This repository is a template for using the [Swagger UI](https://github.com/swagger-api/swagger-ui) to dynamically generate beautiful documentation for your API and host it for free with GitHub Pages.
+## Github Pages
+깃허브 페이지를 통해 무료 호스팅되었습니다. 다음의 링크를 통해 API 문서를 확인할 수 있습니다.
+- https://jhj0517.github.io/kimptracker-swagger-ui/
 
-The template will periodically auto-update the Swagger UI dependency and create a pull request. See the [GitHub Actions workflow here](.github/workflows/update-swagger.yml).
+## API Overview
+[업비트](https://docs.upbit.com/reference/%EC%A0%84%EC%B2%B4-%EA%B3%84%EC%A2%8C-%EC%A1%B0%ED%9A%8C), [바이낸스](https://binance-docs.github.io/apidocs/spot/en/#introduction)로부터 코인 데이터를, [FXRateAPI](https://fxratesapi.com/)를 통해 환율 데이터를 조회하여 김치 프리미엄을 계산합니다. <br>
 
-The example API specification used by this repository can be seen hosted at [https://peter-evans.github.io/swagger-github-pages](https://peter-evans.github.io/swagger-github-pages/).
+각 데이터는 AWS EC2 인스턴스에서 Open API 가 허용하는 한도 내에서 최대한 짧은 인터벌로 갱신됩니다. <br>
 
-## Steps to use this template
+REST API 는 AWS Lambda 와 AWS API Gateway 서비스로 구성하였습니다.
 
-1. Click the `Use this template` button above to create a new repository from this template.
-
-2. Go to the settings for your repository at `https://github.com/{github-username}/{repository-name}/settings` and enable GitHub Pages.
-
-    ![Headers](/screenshots/swagger-github-pages.png?raw=true)
-    
-3. Browse to the Swagger documentation at `https://{github-username}.github.io/{repository-name}/`.
-
-
-## Steps to manually configure in your own repository
-
-1. Download the latest stable release of the Swagger UI [here](https://github.com/swagger-api/swagger-ui/releases).
-
-2. Extract the contents and copy the "dist" directory to the root of your repository.
-
-3. Move the file "index.html" from the directory "dist" to the root of your repository.
-    ```
-    mv dist/index.html .
-    ```
-    
-4. Copy the YAML specification file for your API to the root of your repository.
-
-5. Edit [dist/swagger-initializer.js](dist/swagger-initializer.js) and change the `url` property to reference your local YAML file. 
-    ```javascript
-        window.ui = SwaggerUIBundle({
-            url: "swagger.yaml",
-        ...
-    ```
-    Then fix any references to files in the "dist" directory.
-    ```html
-    ...
-    <link rel="stylesheet" type="text/css" href="dist/swagger-ui.css" >
-    <link rel="icon" type="image/png" href="dist/favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="dist/favicon-16x16.png" sizes="16x16" />    
-    ...
-    <script src="dist/swagger-ui-bundle.js"> </script>
-    <script src="dist/swagger-ui-standalone-preset.js"> </script>    
-    ...
-    ```
-    
-6. Go to the settings for your repository at `https://github.com/{github-username}/{repository-name}/settings` and enable GitHub Pages.
-
-    ![Headers](/screenshots/swagger-github-pages.png?raw=true)
-    
-7. Browse to the Swagger documentation at `https://{github-username}.github.io/{repository-name}/`.
-
-   The example API specification used by this repository can be seen hosted at [https://peter-evans.github.io/swagger-github-pages](https://peter-evans.github.io/swagger-github-pages/).
