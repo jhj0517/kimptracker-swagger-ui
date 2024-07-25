@@ -8,8 +8,6 @@ servers:
 paths:
   /binance:
     get:
-      produces:
-      - "application/json"
       parameters:
       - name: "symbol"
         in: "query"
@@ -51,8 +49,6 @@ paths:
   /exchange-rate:
     get:
       description: "USD를 베이스로 한 여러 환율 정보를 반환합니다."
-      produces:
-      - "application/json"
       responses:
         "200":
           description: "예시 응답입니다."
@@ -106,8 +102,6 @@ paths:
                   timestamp: 1721807940
   /upbit:
     get:
-      produces:
-      - "application/json"
       parameters:
       - name: "symbol"
         in: "query"
@@ -167,8 +161,6 @@ paths:
                   trade_volume: 0.0599462
   /kimchi-premium:
     get:
-      produces:
-      - "application/json"
       parameters:
       - name: "base_symbol"
         in: "query"
