@@ -1,11 +1,10 @@
 ---
-swagger: "2.0"
+openapi: "3.0.0"
 info:
   version: "2024-07-25T08:15:22Z"
   title: "KimpTracker"
-host: "kimpapi.apibottle.com"
-schemes:
-- "https"
+servers:
+  - url: "https://kimpapi.apibottle.com"
 paths:
   /binance:
     get:
