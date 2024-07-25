@@ -1,718 +1,263 @@
 ---
 swagger: "2.0"
 info:
-  description: "This is a sample server Petstore server.  You can find out more about\
-    \ Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).\
-    \  For this sample, you can use the api key `special-key` to test the authorization\
-    \ filters."
-  version: "1.0.5"
-  title: "Swagger Petstore"
-  termsOfService: "http://swagger.io/terms/"
-  contact:
-    email: "apiteam@swagger.io"
-  license:
-    name: "Apache 2.0"
-    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "petstore.swagger.io"
-basePath: "/v2"
-tags:
-- name: "pet"
-  description: "Everything about your Pets"
-  externalDocs:
-    description: "Find out more"
-    url: "http://swagger.io"
-- name: "store"
-  description: "Access to Petstore orders"
-- name: "user"
-  description: "Operations about user"
-  externalDocs:
-    description: "Find out more about our store"
-    url: "http://swagger.io"
+  version: "2024-07-25T08:15:22Z"
+  title: "KimpTracker"
+host: "kimpapi.apibottle.com"
 schemes:
 - "https"
-- "http"
 paths:
-  /pet/{petId}/uploadImage:
-    post:
-      tags:
-      - "pet"
-      summary: "uploads an image"
-      description: ""
-      operationId: "uploadFile"
-      consumes:
-      - "multipart/form-data"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "petId"
-        in: "path"
-        description: "ID of pet to update"
-        required: true
-        type: "integer"
-        format: "int64"
-      - name: "additionalMetadata"
-        in: "formData"
-        description: "Additional data to pass to server"
-        required: false
-        type: "string"
-      - name: "file"
-        in: "formData"
-        description: "file to upload"
-        required: false
-        type: "file"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/ApiResponse"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /pet:
-    post:
-      tags:
-      - "pet"
-      summary: "Add a new pet to the store"
-      description: ""
-      operationId: "addPet"
-      consumes:
-      - "application/json"
-      - "application/xml"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
-      responses:
-        405:
-          description: "Invalid input"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-    put:
-      tags:
-      - "pet"
-      summary: "Update an existing pet"
-      description: ""
-      operationId: "updatePet"
-      consumes:
-      - "application/json"
-      - "application/xml"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
-      responses:
-        400:
-          description: "Invalid ID supplied"
-        404:
-          description: "Pet not found"
-        405:
-          description: "Validation exception"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /pet/findByStatus:
+  /binance:
     get:
-      tags:
-      - "pet"
-      summary: "Finds Pets by status"
-      description: "Multiple status values can be provided with comma separated strings"
-      operationId: "findPetsByStatus"
       produces:
       - "application/json"
-      - "application/xml"
       parameters:
-      - name: "status"
+      - name: "symbol"
         in: "query"
-        description: "Status values that need to be considered for filter"
-        required: true
-        type: "array"
-        items:
-          type: "string"
-          enum:
-          - "available"
-          - "pending"
-          - "sold"
-          default: "available"
-        collectionFormat: "multi"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Pet"
-        400:
-          description: "Invalid status value"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /pet/findByTags:
-    get:
-      tags:
-      - "pet"
-      summary: "Finds Pets by tags"
-      description: "Multiple tags can be provided with comma separated strings. Use\
-        \ tag1, tag2, tag3 for testing."
-      operationId: "findPetsByTags"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters:
-      - name: "tags"
-        in: "query"
-        description: "Tags to filter by"
-        required: true
-        type: "array"
-        items:
-          type: "string"
-        collectionFormat: "multi"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Pet"
-        400:
-          description: "Invalid tag value"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-      deprecated: true
-  /pet/{petId}:
-    get:
-      tags:
-      - "pet"
-      summary: "Find pet by ID"
-      description: "Returns a single pet"
-      operationId: "getPetById"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters:
-      - name: "petId"
-        in: "path"
-        description: "ID of pet to return"
-        required: true
-        type: "integer"
-        format: "int64"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/Pet"
-        400:
-          description: "Invalid ID supplied"
-        404:
-          description: "Pet not found"
-      security:
-      - api_key: []
-    post:
-      tags:
-      - "pet"
-      summary: "Updates a pet in the store with form data"
-      description: ""
-      operationId: "updatePetWithForm"
-      consumes:
-      - "application/x-www-form-urlencoded"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters:
-      - name: "petId"
-        in: "path"
-        description: "ID of pet that needs to be updated"
-        required: true
-        type: "integer"
-        format: "int64"
-      - name: "name"
-        in: "formData"
-        description: "Updated name of the pet"
-        required: false
-        type: "string"
-      - name: "status"
-        in: "formData"
-        description: "Updated status of the pet"
+        description: "Binance 거래소로 부터의 심볼입니다. USDT 거래쌍만 조회 가능합니다. 심볼이 없으면 모든 코인 데이\
+          터를 조회합니다."
         required: false
         type: "string"
       responses:
-        405:
-          description: "Invalid input"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-    delete:
-      tags:
-      - "pet"
-      summary: "Deletes a pet"
-      description: ""
-      operationId: "deletePet"
+        "200":
+          description: "예시 응답입니다."
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    symbol:
+                      type: string
+                      description: "심볼입니다. USDT 거래쌍만 조회가능합니다."
+                    price:
+                      type: string
+                      description: "코인 가격입니다."
+                    timestamp:
+                      type: integer
+                      description: "조회된 시각의 타임스탬프입니다."
+              example:
+                - symbol: "BTCUSDT"
+                  price: '66449.97000000'
+                  timestamp: 1721811395901
+                - symbol: "ETHUSDT"
+                  price: '3460.78000000'
+                  timestamp: 1721811395901
+                - symbol: "BNBUSDT"
+                  price: '588.10000000'
+                  timestamp: 1721811395901
+  /exchange-rate:
+    get:
+      description: "USD를 베이스로 한 여러 환율 정보를 반환합니다."
       produces:
       - "application/json"
-      - "application/xml"
+      responses:
+        "200":
+          description: "예시 응답입니다."
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    base:
+                      type: string
+                      description: "기준 통화"
+                    date:
+                      type: string
+                      format: date-time
+                      description: "환율 정보 날짜"
+                    platform:
+                      type: string
+                      description: "데이터 제공 플랫폼"
+                    privacy:
+                      type: string
+                      format: uri
+                      description: "개인정보 처리방침 URL"
+                    rates:
+                      type: object
+                      description: "각 통화에 대한 환율 정보"
+                      additionalProperties:
+                        type: number
+                    success:
+                      type: boolean
+                      description: "요청 성공 여부"
+                    terms:
+                      type: string
+                      format: uri
+                      description: "이용 약관 URL"
+                    timestamp:
+                      type: integer
+                      description: "데이터 타임스탬프"
+              example:
+                - base: USD
+                  date: "2024-07-24T07:59:00.000Z"
+                  platform: "fxratesapi"
+                  privacy: "https://fxratesapi.com/legal/privacy-policy"
+                  rates:
+                    KRW: 1383.023353
+                    EUR: 0.92358
+                    JPY: 154.59699
+                  success: true
+                  terms: "https://fxratesapi.com/legal/terms-conditions"
+                  timestamp: 1721807940
+  /upbit:
+    get:
+      produces:
+      - "application/json"
       parameters:
-      - name: "api_key"
-        in: "header"
+      - name: "symbol"
+        in: "query"
+        description: "조회할 코인의 업비트 거래소의 심볼입니다. KRW 거래쌍만 조회 가능합니다. 심볼이 없으면 모든 코인 데이터\
+          를 조회합니다."
         required: false
         type: "string"
-      - name: "petId"
-        in: "path"
-        description: "Pet id to delete"
-        required: true
-        type: "integer"
-        format: "int64"
       responses:
-        400:
-          description: "Invalid ID supplied"
-        404:
-          description: "Pet not found"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /store/order:
-    post:
-      tags:
-      - "store"
-      summary: "Place an order for a pet"
-      description: ""
-      operationId: "placeOrder"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "order placed for purchasing the pet"
-        required: true
-        schema:
-          $ref: "#/definitions/Order"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/Order"
-        400:
-          description: "Invalid Order"
-  /store/order/{orderId}:
+        "200":
+          description: "예시 응답입니다. 문서에 등록되어있지 않은 응답 파라미터는 업비트 공식 오픈 API 문서를 참조바랍니다."
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    market:
+                      type: string
+                      description: "심볼입니다."
+                    trade_price:
+                      type: string
+                      description: "코인 가격입니다."
+                    timestamp:
+                      type: integer
+                      description: "조회된 시각의 타임스탬프입니다."
+              example:
+                - market: "KRW-BTC"
+                  acc_trade_price: 135228140899.70966
+                  acc_trade_price_24h: 303724447517.4196
+                  acc_trade_volume: 1469.60410065
+                  acc_trade_volume_24h: 3282.66619234
+                  change: "RISE"
+                  change_price: 780000
+                  change_rate: 0.0084571181
+                  english_name: "Bitcoin"
+                  high_price: 93047000
+                  highest_52_week_date: "2024-03-14"
+                  highest_52_week_price: 105000000
+                  korean_name: "비트코인"
+                  low_price: 91205000
+                  lowest_52_week_date: "2023-09-11"
+                  lowest_52_week_price: 34100000
+                  opening_price: 92196000
+                  prev_closing_price: 92230000
+                  signed_change_price: 780000
+                  signed_change_rate: 0.0084571181
+                  timestamp: 1721811392552
+                  trade_date: "20240724"
+                  trade_date_kst: "20240724"
+                  trade_price: 93010000
+                  trade_time: "085632"
+                  trade_time_kst: "175632"
+                  trade_timestamp: 1721811392516
+                  trade_volume: 0.0599462
+  /kimchi-premium:
     get:
-      tags:
-      - "store"
-      summary: "Find purchase order by ID"
-      description: "For valid response try integer IDs with value >= 1 and <= 10.\
-        \ Other values will generated exceptions"
-      operationId: "getOrderById"
       produces:
       - "application/json"
-      - "application/xml"
       parameters:
-      - name: "orderId"
-        in: "path"
-        description: "ID of pet that needs to be fetched"
-        required: true
-        type: "integer"
-        maximum: 10
-        minimum: 1
-        format: "int64"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/Order"
-        400:
-          description: "Invalid ID supplied"
-        404:
-          description: "Order not found"
-    delete:
-      tags:
-      - "store"
-      summary: "Delete purchase order by ID"
-      description: "For valid response try integer IDs with positive integer value.\
-        \ Negative or non-integer values will generate API errors"
-      operationId: "deleteOrder"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters:
-      - name: "orderId"
-        in: "path"
-        description: "ID of the order that needs to be deleted"
-        required: true
-        type: "integer"
-        minimum: 1
-        format: "int64"
-      responses:
-        400:
-          description: "Invalid ID supplied"
-        404:
-          description: "Order not found"
-  /store/inventory:
-    get:
-      tags:
-      - "store"
-      summary: "Returns pet inventories by status"
-      description: "Returns a map of status codes to quantities"
-      operationId: "getInventory"
-      produces:
-      - "application/json"
-      parameters: []
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            type: "object"
-            additionalProperties:
-              type: "integer"
-              format: "int32"
-      security:
-      - api_key: []
-  /user/createWithArray:
-    post:
-      tags:
-      - "user"
-      summary: "Creates list of users with given input array"
-      description: ""
-      operationId: "createUsersWithArrayInput"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "List of user object"
-        required: true
-        schema:
-          type: "array"
-          items:
-            $ref: "#/definitions/User"
-      responses:
-        default:
-          description: "successful operation"
-  /user/createWithList:
-    post:
-      tags:
-      - "user"
-      summary: "Creates list of users with given input array"
-      description: ""
-      operationId: "createUsersWithListInput"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "List of user object"
-        required: true
-        schema:
-          type: "array"
-          items:
-            $ref: "#/definitions/User"
-      responses:
-        default:
-          description: "successful operation"
-  /user/{username}:
-    get:
-      tags:
-      - "user"
-      summary: "Get user by user name"
-      description: ""
-      operationId: "getUserByName"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters:
-      - name: "username"
-        in: "path"
-        description: "The name that needs to be fetched. Use user1 for testing. "
-        required: true
-        type: "string"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/User"
-        400:
-          description: "Invalid username supplied"
-        404:
-          description: "User not found"
-    put:
-      tags:
-      - "user"
-      summary: "Updated user"
-      description: "This can only be done by the logged in user."
-      operationId: "updateUser"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters:
-      - name: "username"
-        in: "path"
-        description: "name that need to be updated"
-        required: true
-        type: "string"
-      - in: "body"
-        name: "body"
-        description: "Updated user object"
-        required: true
-        schema:
-          $ref: "#/definitions/User"
-      responses:
-        400:
-          description: "Invalid user supplied"
-        404:
-          description: "User not found"
-    delete:
-      tags:
-      - "user"
-      summary: "Delete user"
-      description: "This can only be done by the logged in user."
-      operationId: "deleteUser"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters:
-      - name: "username"
-        in: "path"
-        description: "The name that needs to be deleted"
-        required: true
-        type: "string"
-      responses:
-        400:
-          description: "Invalid username supplied"
-        404:
-          description: "User not found"
-  /user/login:
-    get:
-      tags:
-      - "user"
-      summary: "Logs user into the system"
-      description: ""
-      operationId: "loginUser"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters:
-      - name: "username"
+      - name: "base_symbol"
         in: "query"
-        description: "The user name for login"
-        required: true
+        description: "조회할 코인의 베이스 심볼입니다."
+        required: false
         type: "string"
-      - name: "password"
+      - name: "upbit_symbol"
         in: "query"
-        description: "The password for login in clear text"
-        required: true
+        description: "조회할 코인의 업비트 거래소의 심볼입니다. KRW 거래쌍만 조회 가능합니다."
+        required: false
+        type: "string"
+      - name: "binance_symbol"
+        in: "query"
+        description: "조회할 코인의 바이낸스 거래소의 심볼입니다. USDT 거래쌍만 조회 가능합니다."
+        required: false
         type: "string"
       responses:
-        200:
-          description: "successful operation"
-          headers:
-            X-Expires-After:
-              type: "string"
-              format: "date-time"
-              description: "date in UTC when token expires"
-            X-Rate-Limit:
-              type: "integer"
-              format: "int32"
-              description: "calls per hour allowed by the user"
-          schema:
-            type: "string"
-        400:
-          description: "Invalid username/password supplied"
-  /user/logout:
-    get:
-      tags:
-      - "user"
-      summary: "Logs out current logged in user session"
-      description: ""
-      operationId: "logoutUser"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters: []
-      responses:
-        default:
-          description: "successful operation"
-  /user:
-    post:
-      tags:
-      - "user"
-      summary: "Create user"
-      description: "This can only be done by the logged in user."
-      operationId: "createUser"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Created user object"
-        required: true
-        schema:
-          $ref: "#/definitions/User"
-      responses:
-        default:
-          description: "successful operation"
-securityDefinitions:
-  api_key:
-    type: "apiKey"
-    name: "api_key"
-    in: "header"
-  petstore_auth:
-    type: "oauth2"
-    authorizationUrl: "https://petstore.swagger.io/oauth/authorize"
-    flow: "implicit"
-    scopes:
-      read:pets: "read your pets"
-      write:pets: "modify pets in your account"
+        "200":
+          description: "예시 응답입니다."
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    base_symbol:
+                      type: string
+                      description: "코인 심볼"
+                    binance_data:
+                      type: object
+                      properties:
+                        symbol:
+                          type: string
+                          description: "바이낸스 거래소 심볼"
+                        price:
+                          type: number
+                          description: "바이낸스 거래소 가격"
+                        timestamp:
+                          type: integer
+                          description: "바이낸스 데이터 조회 시각 타임스탬프"
+                    english_name:
+                      type: string
+                      description: "코인 영문명"
+                    exchange_rate:
+                      type: object
+                      properties:
+                        usd_krw:
+                          type: number
+                          description: "USD/KRW 환율"
+                        timestamp:
+                          type: integer
+                          description: "환율 데이터 타임스탬프"
+                    kimchi_premium:
+                      type: number
+                      description: "김치 프리미엄 비율 (%)"
+                    korean_name:
+                      type: string
+                      description: "코인 한글명"
+                    timestamp:
+                      type: integer
+                      description: "김치 프리미엄 데이터 계산 시각 타임스탬프"
+                    upbit_data:
+                      type: object
+                      properties:
+                        symbol:
+                          type: string
+                          description: "업비트 거래소 심볼"
+                        price:
+                          type: number
+                          description: "업비트 거래소 가격"
+                        timestamp:
+                          type: integer
+                          description: "업비트 데이터 조회 시각 타임스탬프"
+              example:
+                - base_symbol: "BTC"
+                  binance_data:
+                    symbol: "BTCUSDT"
+                    price: 66449.97
+                    timestamp: 1721811395901
+                  english_name: "Bitcoin"
+                  exchange_rate:
+                    usd_krw: 1383.023353
+                    timestamp: 1721807940
+                  kimchi_premium: 1.2057859112301985
+                  korean_name: "비트코인"
+                  timestamp: 1721811412212
+                  upbit_data:
+                    symbol: "KRW-BTC"
+                    price: 93010000
+                    timestamp: 1721811392552
 definitions:
-  ApiResponse:
+  Empty:
     type: "object"
-    properties:
-      code:
-        type: "integer"
-        format: "int32"
-      type:
-        type: "string"
-      message:
-        type: "string"
-  Category:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      name:
-        type: "string"
-    xml:
-      name: "Category"
-  Pet:
-    type: "object"
-    required:
-    - "name"
-    - "photoUrls"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      category:
-        $ref: "#/definitions/Category"
-      name:
-        type: "string"
-        example: "doggie"
-      photoUrls:
-        type: "array"
-        xml:
-          wrapped: true
-        items:
-          type: "string"
-          xml:
-            name: "photoUrl"
-      tags:
-        type: "array"
-        xml:
-          wrapped: true
-        items:
-          xml:
-            name: "tag"
-          $ref: "#/definitions/Tag"
-      status:
-        type: "string"
-        description: "pet status in the store"
-        enum:
-        - "available"
-        - "pending"
-        - "sold"
-    xml:
-      name: "Pet"
-  Tag:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      name:
-        type: "string"
-    xml:
-      name: "Tag"
-  Order:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      petId:
-        type: "integer"
-        format: "int64"
-      quantity:
-        type: "integer"
-        format: "int32"
-      shipDate:
-        type: "string"
-        format: "date-time"
-      status:
-        type: "string"
-        description: "Order Status"
-        enum:
-        - "placed"
-        - "approved"
-        - "delivered"
-      complete:
-        type: "boolean"
-    xml:
-      name: "Order"
-  User:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      username:
-        type: "string"
-      firstName:
-        type: "string"
-      lastName:
-        type: "string"
-      email:
-        type: "string"
-      password:
-        type: "string"
-      phone:
-        type: "string"
-      userStatus:
-        type: "integer"
-        format: "int32"
-        description: "User Status"
-    xml:
-      name: "User"
-externalDocs:
-  description: "Find out more about Swagger"
-  url: "http://swagger.io"
+    title: "Empty Schema"
