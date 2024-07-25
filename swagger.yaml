@@ -16,7 +16,9 @@ paths:
         description: "Binance 거래소로 부터의 심볼입니다. USDT 거래쌍만 조회 가능합니다. 심볼이 없으면 모든 코인 데이\
           터를 조회합니다."
         required: false
-        type: "string"
+        schema:
+          type: "string"
+          nullable: true
       responses:
         "200":
           description: "예시 응답입니다."
@@ -112,7 +114,9 @@ paths:
         description: "조회할 코인의 업비트 거래소의 심볼입니다. KRW 거래쌍만 조회 가능합니다. 심볼이 없으면 모든 코인 데이터\
           를 조회합니다."
         required: false
-        type: "string"
+        schema:
+          type: "string"
+          nullable: true
       responses:
         "200":
           description: "예시 응답입니다. 문서에 등록되어있지 않은 응답 파라미터는 업비트 공식 오픈 API 문서를 참조바랍니다."
@@ -170,17 +174,23 @@ paths:
         in: "query"
         description: "조회할 코인의 베이스 심볼입니다."
         required: false
-        type: "string"
+        schema:
+          type: "string"
+          nullable: true
       - name: "upbit_symbol"
         in: "query"
         description: "조회할 코인의 업비트 거래소의 심볼입니다. KRW 거래쌍만 조회 가능합니다."
         required: false
-        type: "string"
+        schema:
+          type: "string"
+          nullable: true
       - name: "binance_symbol"
         in: "query"
         description: "조회할 코인의 바이낸스 거래소의 심볼입니다. USDT 거래쌍만 조회 가능합니다."
         required: false
-        type: "string"
+        schema:
+          type: "string"
+          nullable: true
       responses:
         "200":
           description: "예시 응답입니다."
