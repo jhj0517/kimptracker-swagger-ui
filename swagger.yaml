@@ -15,7 +15,7 @@ paths:
         in: "query"
         description: "Binance 거래소로 부터의 심볼입니다. USDT 거래쌍만 조회 가능합니다. 심볼이 없으면 모든 코인 데이\
           터를 조회합니다."
-        required: true
+        required: false
         schema:
           type: "string"
       responses:
