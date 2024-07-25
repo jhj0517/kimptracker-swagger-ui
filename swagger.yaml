@@ -18,7 +18,6 @@ paths:
         required: true
         schema:
           type: "string"
-          nullable: false
       responses:
         "200":
           description: "예시 응답입니다."
