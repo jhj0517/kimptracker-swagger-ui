@@ -113,7 +113,7 @@ paths:
           nullable: true
       responses:
         "200":
-          description: "예시 응답입니다. 문서에 등록되어있지 않은 응답 파라미터는 업비트 공식 오픈 API 문서를 참조바랍니다."
+          description: "예시 응답입니다."
           content:
             application/json:
               schema:
