@@ -266,7 +266,3 @@ paths:
                     symbol: "KRW-BTC"
                     price: 93010000
                     timestamp: 1721811392552
-definitions:
-  Empty:
-    type: "object"
-    title: "Empty Schema"
