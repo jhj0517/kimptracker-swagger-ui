@@ -238,6 +238,15 @@ paths:
                         price:
                           type: number
                           description: "업비트 거래소 가격"
+                        change:
+                          type: string
+                          description: "가격 변화의 방향.\nEven: 보합\nRISE: 상승\nFALL: 하락"
+                        change_rate:
+                          type: number
+                          description: "변화율의 절대값"
+                        change_price:
+                          type: number
+                          description: "변화액의 절대값"
                         timestamp:
                           type: integer
                           description: "업비트 데이터 조회 시각 타임스탬프"
