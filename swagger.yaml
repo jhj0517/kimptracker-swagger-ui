@@ -267,6 +267,6 @@ paths:
                     symbol: "KRW-BTC"
                     price: 93010000
                     timestamp: 1721811392552
-                    change: "RISE",
-                    change_rate: 0.0194668253,
+                    change: "RISE"
+                    change_rate: 0.0194668253
                     change_price: 1800000
