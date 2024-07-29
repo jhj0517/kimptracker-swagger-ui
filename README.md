@@ -1,5 +1,5 @@
 # KimpTracker API Documnetation
-해당 레포지토리는 [swagger-github-pages](https://github.com/peter-evans/swagger-github-pages)를 템플릿으로 사용해 KimpTracker Open API 를 [Swagger UI](https://github.com/swagger-api/swagger-ui) 로 문서화한 레포지토리입니다.
+해당 레포지토리는 [swagger-github-pages](https://github.com/peter-evans/swagger-github-pages)를 템플릿으로 사용해 [KimpTracker](https://github.com/jhj0517/KimpTracker) Open API 를 [Swagger UI](https://github.com/swagger-api/swagger-ui) 로 문서화한 레포지토리입니다.
 
 ## Github Pages
 깃허브 페이지를 통해 무료 호스팅되었습니다. 다음의 링크를 통해 API 문서를 확인할 수 있습니다.
